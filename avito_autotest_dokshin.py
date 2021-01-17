@@ -134,5 +134,5 @@ value_chek(vs['values'])
 for j in range(len(vs['values'])):
     one(vs['values'][j])
 
-new_test(ts)
+new_test(ts) 
 print_new_file(ts)
