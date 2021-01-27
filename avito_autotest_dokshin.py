@@ -8,22 +8,22 @@ def new_test(ts):
     # она заполняет TestcaseStructure.json згначениями из Values.json
     # ts - это декодированый TestcaseStructure.json из формата json в dist
     first_chek_p(ts)
-    for params in ts:
-        params = ts['params']
-        for i in range(len(params)):
-            onei(params[i], 'TestcaseStructure.json')
-            onev_ts(params[i])
-            onet(params[i], 'TestcaseStructure.json')
-            if 'values' in params[i]:
-                values1 = params[i]['values'] 
-                for z in range(len(values1)):
-                    if 'params' in values1[z]:
-                        new_test(values1[z])
-                        hard_case(vs,params,i,z)
-                    else:
-                        hard_case(vs,params,i,z)
-            else:
-                easy_case(vs,params,i)
+    #for params in ts:
+    params = ts['params']
+    for i in range(len(params)):
+        onei(params[i], 'TestcaseStructure.json')
+        onev_ts(params[i])
+        onet(params[i], 'TestcaseStructure.json')
+        if 'values' in params[i]:
+            values1 = params[i]['values'] 
+            for z in range(len(values1)):
+                if 'params' in values1[z]:
+                    new_test(values1[z])
+                    hard_case(vs,params,i,z)
+                else:
+                    hard_case(vs,params,i,z)
+        else:
+            easy_case(vs,params,i)
 
 def easy_case(vs, params, i):
     # функция easy_case(vs, params, i) записывает значения value, если нет values
@@ -42,6 +42,8 @@ def easy_case(vs, params, i):
                     break
             if flag == 1:
                 break
+        if flag == 1:
+            break
 
 def hard_case(vs, params, i, z):
     # функция hard_case(vs, params, i, z) записывает значения value, если есть values
@@ -55,11 +57,15 @@ def hard_case(vs, params, i, z):
         for j in range(len(values2)):
             for id in values2[j]:
                 if values2[j]['value'] == params[i]['values'][z]['id']:
+                    value_value(params[i]['value'])
                     params[i]['value'] = params[i]['values'][z]['title']
                     flag = 1
                     break
             if flag == 1:
                 break
+        if flag == 1:
+            break
+
 
 def validate(filename, error_str):
     # функция validate(filename, error_str) проводит проверку на возможность декодировать входной фаил
