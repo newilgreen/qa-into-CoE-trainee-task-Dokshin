@@ -8,15 +8,17 @@ def new_test(ts):
     # она заполняет TestcaseStructure.json згначениями из Values.json
     # ts - это декодированый TestcaseStructure.json из формата json в dist
     first_chek_p(ts)
-    #for params in ts:
     params = ts['params']
     for i in range(len(params)):
         onei(params[i], 'TestcaseStructure.json')
         onev_ts(params[i])
         onet(params[i], 'TestcaseStructure.json')
         if 'values' in params[i]:
+            value_chek(params[i]['values'], 'values', 'TestcaseStructure.json')
             values1 = params[i]['values'] 
             for z in range(len(values1)):
+                onei(values1[z], 'TestcaseStructure.json')
+                onet(values1[z], 'TestcaseStructure.json')
                 if 'params' in values1[z]:
                     new_test(values1[z])
                     hard_case(vs,params,i,z)
@@ -153,7 +155,7 @@ def value_value(value):
 
 
 def value_chek(value, spf, location):
-    # функуция value_chek(value) проверяет не пуст ли ключевой параметр(id,title,values,params)
+    # функуция value_chek(value) проверяет не пуст ли ключевой параметр(id,title,values)
     # value - проверяемое значение
     if value == "":
         print_error_file(get_error(error_base, location, 3, spf))
