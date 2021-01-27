@@ -5,7 +5,7 @@ import sys
 
 def new_test(ts):
     # функция new_test(ts) основная часть программы
-    # она заполняет TestcaseStructure.json згначениями из Values.json
+    # она заполняет TestcaseStructure.json значениями из Values.json
     # ts - это декодированый TestcaseStructure.json из формата json в dist
     first_chek_p(ts)
     params = ts['params']
@@ -13,6 +13,7 @@ def new_test(ts):
         onei(params[i], 'TestcaseStructure.json')
         onev_ts(params[i])
         onet(params[i], 'TestcaseStructure.json')
+        value_value(params[i]['value'])
         if 'values' in params[i]:
             value_chek(params[i]['values'], 'values', 'TestcaseStructure.json')
             values1 = params[i]['values'] 
@@ -38,7 +39,6 @@ def easy_case(vs, params, i):
         for j in range(len(values2)):
             for id in values2[j]:
                 if values2[j]['id'] == params[i]['id']:
-                    value_value(params[i]['value'])
                     params[i]['value'] = values2[j]['value']
                     flag = 1
                     break
@@ -59,7 +59,6 @@ def hard_case(vs, params, i, z):
         for j in range(len(values2)):
             for id in values2[j]:
                 if values2[j]['value'] == params[i]['values'][z]['id']:
-                    value_value(params[i]['value'])
                     params[i]['value'] = params[i]['values'][z]['title']
                     flag = 1
                     break
